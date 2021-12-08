@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import ReactDOM from 'react-dom'
+import {Container, Row, Col, Button, Alert} from 'reactstrap';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+const style_textarea = {'width': '1000px', 'height': '500px'}
+
+var json = require('./data.json');
+const insertCode = key => () => {
+    document.getElementById("source_html").value += json[key] + "\n"
+
+    let html = document.getElementById("source_html").value
+    let element = ReactHtmlParser(html);
+    ReactDOM.render(element,
+        document.getElementById("preview"));
+}
+
+function Render(element) {
+    return (element)
+}
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Container>
+            <Row>
+                <Col className="bg-light border" xs="2">
+                    <Button color="primary" onClick={insertCode("alert")}>List</Button>
+                    <br/>
+                    <Button color="primary">List2</Button>
+                </Col>
+                <Col className="bg-light border" xs="8">
+                    <textarea id="source_html" style={style_textarea}></textarea>
+                </Col>
+            </Row>
+            <Row>
+                <Col className="bg-light border" xs="12">
+                    <div id="preview">
+
+                    </div>
+                </Col>
+            </Row>
+        </Container>
+    );
 }
 
 export default App;
