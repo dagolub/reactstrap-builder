@@ -1,1 +1,2 @@
-{"alert": "<Button color='primary'>Click Me</Button>"}
+{"button": "<Button color='primary'>Click Me</Button>",
+  "alert": "<Alert color='primary'>Click Me</Alert>"}
